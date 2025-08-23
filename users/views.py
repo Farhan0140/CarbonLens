@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.tokens import default_token_generator
 
 from users.forms import Guest_User_Form, User_Register_Form
-from users.models import Guest_User
+from users.models import Guest_User, User
 
 
 def test(request):
@@ -59,3 +60,18 @@ def User_SignUp( request ):
     }
 
     return render(request, "registration/sign_up.html", context)
+
+
+def Activate_User(request, user_id, token):
+    user = User.objects.get(id=user_id)
+
+    try:
+        if default_token_generator.check_token(user, token):
+            user.is_active = True
+            user.save()
+            messages.success(request, "Your Account Activated Successfully, Log-In")
+            return redirect('Test')
+        else:
+            print('This Account Already Activate')
+    except:
+        print('User Not Found')
