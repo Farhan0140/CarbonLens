@@ -51,3 +51,9 @@
     @apply  bg-gradient-to-r from-[#4ade80] to-[#22c55e] text-white font-semibold shadow-[4px_4px_8px_rgba(163,226,189,0.6),-4px_-4px_8px_#ffffff] transition-all duration-300 ease-in-out rounded-xl hover:translate-y-[-2px] hover:shadow-[6px_6px_12px_rgba(163,226,189,0.8),-6px_-6px_12px_#ffffff] hover:filter hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-green-400 px-5 py-2;
   }
 }
+
+@layer components {
+  .label-s {
+    @apply block text-lg font-medium text-[#666] mb-2;
+  }
+}
