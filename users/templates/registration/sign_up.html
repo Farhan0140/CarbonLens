@@ -1,0 +1,94 @@
+{% extends "navbars/logged_nav.html" %}
+
+{% block for_main_container %}
+
+<!-- Electricity Usage Card -->
+<div class="bg-gradient-to-r from-white to-[#c2eece] rounded-2xl shadow-neu-hover p-6 transition-all duration-300 ease-in-out hover:shadow-neu hover:-translate-y-1 w-1/2 m-auto mt-16">
+
+    <!-- Title -->
+    <h2 class="text-xl font-bold text-green-800 flex items-center gap-2 mb-5">
+        <i class="fas fa-bolt text-green-600"></i>
+        Electricity Usage
+    </h2>
+
+    <!-- Toggle Buttons -->
+    <div class="flex gap-2 mb-5">
+        <!-- Monthly Bill Button -->
+        <button id="bill-method"
+                class="flex-1 text-center py-2.5 text-gray-600 font-semibold 
+                    bg-[#f5f5f5] rounded-xl 
+                    shadow-neu transition-all duration-200 ease-in-out 
+                    hover:text-[#40b98c] hover:-translate-y-1 hover:shadow-md">
+            Monthly Bill
+        </button>
+
+        <!-- Appliance Usage Button -->
+        <button id="appliance-method"
+                class="flex-1 text-center py-2.5 text-gray-600 font-semibold 
+                    bg-[#f5f5f5] rounded-xl 
+                    shadow-neu transition-all duration-200 ease-in-out 
+                    hover:text-[#40b98c] hover:-translate-y-1 hover:shadow-md">
+            Appliance Usage
+        </button>
+    </div>
+
+    <!-- Bill Input -->
+    <div id="bill-input" class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Units Consumed (kWh)</label>
+            <input type="number" id="units-consumed"
+                    class="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-blue-50 to-gray-100 shadow-neu-inner border-0 outline-none text-gray-800 placeholder-gray-500"
+                    placeholder="Enter kWh from your bill" min="0"/>
+            <small class="text-xs text-gray-500">Based on your monthly electricity bill</small>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Country/Region</label>
+            <select id="country" class="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-blue-50 to-gray-100 shadow-neu-inner border-0 outline-none text-gray-800 pr-10 cursor-pointer">
+                <option value="">Select your country</option>
+                <option value="us">United States</option>
+                <option value="uk">United Kingdom</option>
+                <option value="de">Germany</option>
+                <option value="fr">France</option>
+                <option value="in">India</option>
+                <option value="cn">China</option>
+                <option value="jp">Japan</option>
+                <option value="br">Brazil</option>
+            </select>
+            <small class="text-xs text-gray-500">Used for location-based electricity generation data</small>
+        </div>
+    </div>
+
+    <!-- Appliance Input (Hidden) -->
+    <div id="appliance-input" class="space-y-4 hidden">
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Appliance</label>
+            <select id="appliance-list"
+                    class="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-blue-50 to-gray-100 shadow-neu-inner border-0 outline-none text-gray-800 pr-10 cursor-pointer">
+                <option value="">Select appliance</option>
+                <option value="fridge">Refrigerator</option>
+                <option value="ac">Air Conditioner</option>
+                <option value="tv">Television</option>
+                <option value="computer">Computer</option>
+                <option value="washing">Washing Machine</option>
+                <option value="oven">Oven/Microwave</option>
+                <option value="lighting">Lighting</option>
+            </select>
+        </div>
+
+        <div class="flex gap-3">
+            <div class="flex-1">
+                <input type="number" id="quantity" placeholder="Quantity" min="1" value="1"
+                        class="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-blue-50 to-gray-100 shadow-neu-inner border-0 outline-none text-gray-800"/>
+            </div>
+            <div class="flex-1">
+                <input type="number" id="hours" placeholder="Hours/day" min="0" max="24" step="0.5"
+                        class="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-blue-50 to-gray-100 shadow-neu-inner border-0 outline-none text-gray-800"/>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock for_main_container %}

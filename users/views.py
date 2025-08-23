@@ -5,7 +5,7 @@ from users.models import Guest_User
 
 
 def test(request):
-    return render(request, 'navbars/non_logged_nav.html')
+    return render(request, 'registration/sign_up.html')
 
 def get_current_guest_user(request):
     guest_id = request.session.get("guest_user_id")
