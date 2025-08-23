@@ -39,29 +39,61 @@
 
     <!-- Bill Input -->
     <div id="bill-input" class="space-y-4">
-        <div>
-            <label class="label-s">Units Consumed (kWh)</label>
-            <input type="number" id="units-consumed"
-                    class="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-blue-50 to-gray-100 shadow-neu-inner border-0 outline-none text-gray-800 placeholder-gray-500"
-                    placeholder="Enter kWh from your bill" min="0"/>
-            <small class="text-xs text-gray-500">Based on your monthly electricity bill</small>
-        </div>
+        <form action="", method="POST">
+            {% csrf_token %}
 
-        <div>
-            <label class="label-s">Country/Region</label>
-            <select id="country" class="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-blue-50 to-gray-100 shadow-neu-inner border-0 outline-none text-gray-800 pr-10 cursor-pointer">
-                <option value="">Select your country</option>
-                <option value="us">United States</option>
-                <option value="uk">United Kingdom</option>
-                <option value="de">Germany</option>
-                <option value="fr">France</option>
-                <option value="in">India</option>
-                <option value="cn">China</option>
-                <option value="jp">Japan</option>
-                <option value="br">Brazil</option>
-            </select>
-            <small class="text-xs text-gray-500">Used for location-based electricity generation data</small>
-        </div>
+            {% for field in form %}
+                <p><label for="{{field.id_for_label}}" class="label-s"> {{ field.label }} </label></p>
+
+                {% if field.errors %}
+                <ul class="space-y-2">
+                    {% for error in field.errors %}
+                        <li class="w-full my-3">
+                            <span class="flex-1 text-center text-gray-600 font-bold text-md
+                                text-[#ff0101] rounded-xl before:content-['▹']">
+                                
+                                {{ error }}
+                            
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {{ field }}
+                
+            {% endfor %}
+
+
+            {% if form.non_field_errors %}
+            <ul class="space-y-2">
+                {% for error in form.non_field_errors %}
+                    <li class="w-full mb-3">
+                        <span class="flex-1 text-center text-gray-600 font-bold text-md
+                            text-[#ff0101] rounded-xl before:content-['▹']">
+                            
+                            {{ error }}
+                        
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="p-3 my-4 text-center rounded-lg font-bold border w-full text-white {% if 'success' in message.tags %} bg-green-700{% endif %} {% if 'error' in message.tags %}bg-red-800{% endif %}"> {{ message }} </div>
+                {% endfor %}
+            {% endif %}
+
+            <button type="submit" class="flex-1 text-center py-2.5 text-gray-600 font-bold text-xl
+                        bg-[#007bff] rounded-xl text-white w-full
+                        shadow-neu transition-all duration-200 ease-in-out 
+                        hover:bg-[#50a4ff] hover:-translate-y-1 hover:shadow-md">
+                Submit
+            </button>
+        </form>
     </div>
 
     <!-- Appliance Input (Hidden) -->
@@ -92,6 +124,8 @@
             </div>
         </div>
     </div>
+    
+    
 
 </div>
 

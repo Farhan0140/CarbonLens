@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 
-from users.forms import Guest_User_Form
+from users.forms import Guest_User_Form, User_Register_Form
 from users.models import Guest_User
 
 
@@ -38,3 +39,23 @@ def test_guest_user( request ):
     }
     
     return render(request, "guest_user_login.html", context)
+
+
+def User_SignUp( request ):
+    form = User_Register_Form()
+
+    if request.method == "POST":
+        form = User_Register_Form(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            messages.success(request, "A confirmation mail send to your mail..")
+            return redirect("Test")
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, "registration/sign_up.html", context)

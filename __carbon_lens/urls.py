@@ -9,5 +9,6 @@ from users.views import test
 urlpatterns = [
     path('', test, name='Test'),
     path('admin/', admin.site.urls),
+    path('user/', include("users.urls"))
 ] + debug_toolbar_urls()
 
