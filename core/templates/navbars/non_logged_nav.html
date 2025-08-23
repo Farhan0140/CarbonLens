@@ -1,0 +1,168 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom Shadows */
+        .shadow-box-inner {
+            box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff;
+        }
+        .shadow-neu {
+            box-shadow: 8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff;
+        }
+
+        /* Hamburger icon rotation */
+        #navbar-toggle i {
+            transition: transform 0.3s ease;
+        }
+        #navbar-toggle.menu-open i {
+            transform: rotate(90deg);
+        }
+
+        /* Sign In / Sign Up button hover effect */
+        .btn-outline {
+            background: linear-gradient(135deg, #ffffff, #f0f7f0);
+            border: 1px solid #b8dbb0;
+            box-shadow: 4px 4px 8px #d1d9e6, -4px -4px 8px #ffffff;
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover {
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 12px #c0d0dc, -6px -6px 12px #ffffff;
+            border-color: #82eda0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: white;
+            box-shadow: 4px 4px 8px rgba(163, 226, 189, 0.6), -4px -4px 8px #ffffff;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 12px rgba(163, 226, 189, 0.8), -6px -6px 12px #ffffff;
+            filter: brightness(1.1);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen text-dark leading-relaxed bg-gradient-to-br from-[#f5faf5] to-[#e6f5e4]">
+    <div class="container max-w-[1400px] mx-auto p-5">
+
+        <!-- Responsive Navbar -->
+        <nav class="w-full p-4 rounded-2xl bg-gradient-to-r from-white to-[#82eda0] shadow-neu flex flex-wrap items-center justify-between gap-4 sticky top-4 z-50">
+
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-gradient-to-r from-[#e6e9f0] to-white shadow-[8px_8px_16px_#d1d9e6,-8px_-8px_16px_#ffffff] rounded-full flex items-center justify-center text-primary">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="text-xl font-bold text-primary-dark">
+                    Carbon<span class="text-primary">Lens</span>
+                </div>
+            </div>
+
+            <!-- Hamburger / Close Button -->
+            <button id="navbar-toggle" class="lg:hidden text-2xl text-gray-700 focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Desktop Menu (only lg and up) -->
+            <ul id="desktop-menu" class="hidden lg:flex flex-row space-x-2 ml-auto">
+                <li><a href="#" class="flex items-center px-5 py-3 rounded-xl font-semibold text-gray bg-gradient-to-r from-secondary to-[#d9e5e1] shadow-box-inner hover:border-b-4 border-green-600 hover:text-primary-dark transition-all duration-300">
+                    <i class="fas fa-home mr-2"></i> Home
+                </a></li>
+                <li><a href="#" class="flex items-center px-5 py-3 rounded-xl font-semibold text-gray bg-gradient-to-r from-secondary to-[#d9e5e1] shadow-box-inner hover:border-b-4 border-green-600 hover:text-primary-dark transition-all duration-300">
+                    <i class="fas fa-car mr-2"></i> Transport
+                </a></li>
+                <li><a href="#" class="flex items-center px-5 py-3 rounded-xl font-semibold text-gray bg-gradient-to-r from-secondary to-[#d9e5e1] shadow-box-inner hover:border-b-4 border-green-600 hover:text-primary-dark transition-all duration-300">
+                    <i class="fas fa-bolt mr-2"></i> Electricity
+                </a></li>
+                <li><a href="#" class="flex items-center px-5 py-3 rounded-xl font-semibold text-gray bg-gradient-to-r from-secondary to-[#d9e5e1] shadow-box-inner hover:border-b-4 border-green-600 hover:text-primary-dark transition-all duration-300">
+                    <i class="fas fa-apple-alt mr-2"></i> Lifestyle
+                </a></li>
+                <li><a href="#" class="flex items-center px-5 py-3 rounded-xl font-semibold text-gray bg-gradient-to-r from-secondary to-[#d9e5e1] shadow-box-inner hover:border-b-4 border-green-600 hover:text-primary-dark transition-all duration-300">
+                    <i class="fas fa-chart-line mr-2"></i> Results
+                </a></li>
+
+                <!-- Sign In & Sign Up Buttons (Right-Aligned) -->
+                <li class="ml-6 flex items-center gap-3">
+                    <a href="/login" class="btn-outline px-5 py-2 rounded-xl font-medium text-gray-700">
+                        Sign In
+                    </a>
+                    <a href="/signup" class="btn-primary px-5 py-2 rounded-xl font-semibold text-white">
+                        Sign Up
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Mobile & Tablet Dropdown Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden mt-2 w-full bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+            <ul class="text-gray-700 text-sm">
+                <li><a href="#" class="flex items-center px-5 py-3 border-b border-gray-100 hover:bg-green-50 hover:text-primary transition-all duration-200">
+                    <i class="fas fa-home mr-3 text-primary"></i> Home
+                </a></li>
+                <li><a href="#" class="flex items-center px-5 py-3 border-b border-gray-100 hover:bg-green-50 hover:text-primary transition-all duration-200">
+                    <i class="fas fa-car mr-3 text-primary"></i> Transport
+                </a></li>
+                <li><a href="#" class="flex items-center px-5 py-3 border-b border-gray-100 hover:bg-green-50 hover:text-primary transition-all duration-200">
+                    <i class="fas fa-bolt mr-3 text-primary"></i> Electricity
+                </a></li>
+                <li><a href="#" class="flex items-center px-5 py-3 border-b border-gray-100 hover:bg-green-50 hover:text-primary transition-all duration-200">
+                    <i class="fas fa-apple-alt mr-3 text-primary"></i> Lifestyle
+                </a></li>
+                <li><a href="#" class="flex items-center px-5 py-3 border-b border-gray-100 hover:bg-green-50 hover:text-primary transition-all duration-200">
+                    <i class="fas fa-chart-line mr-3 text-primary"></i> Results
+                </a></li>
+
+                <!-- Sign In & Sign Up in Mobile Menu -->
+                <li class="flex flex-col border-t border-gray-100 bg-gray-50">
+                    <a href="/login" class="btn-outline m-3 px-5 py-2 rounded-xl text-center font-medium text-gray-700">
+                        Sign In
+                    </a>
+                    <a href="/signup" class="btn-primary m-3 px-5 py-2 rounded-xl text-center font-semibold text-white">
+                        Sign Up
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Hamburger Toggle
+        const navbarToggle = document.getElementById('navbar-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const toggleIcon = navbarToggle.querySelector('i');
+
+        navbarToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+
+            if (mobileMenu.classList.contains('hidden')) {
+                toggleIcon.classList.remove('fa-xmark');
+                toggleIcon.classList.add('fa-bars');
+                navbarToggle.classList.remove('menu-open');
+            } else {
+                toggleIcon.classList.remove('fa-bars');
+                toggleIcon.classList.add('fa-xmark');
+                navbarToggle.classList.add('menu-open');
+            }
+        });
+
+        // Optional: Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                toggleIcon.classList.remove('fa-xmark');
+                toggleIcon.classList.add('fa-bars');
+                navbarToggle.classList.remove('menu-open');
+            });
+        });
+    </script>
+</body>
+</html>

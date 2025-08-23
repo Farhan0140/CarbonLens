@@ -4,7 +4,10 @@ from django.urls import path, include
 from debug_toolbar.toolbar import debug_toolbar_urls
 
 
+from users.views import test
+
 urlpatterns = [
+    path('', test, name='Test'),
     path('admin/', admin.site.urls),
 ] + debug_toolbar_urls()
 

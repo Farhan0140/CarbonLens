@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .shadow-neu {
+    @apply shadow-[8px_8px_16px_#d1d9e6,-8px_-8px_16px_#ffffff];
+  }
+
+  .shadow-box-inner {
+    @apply shadow-[inset_4px_4px_8px_#d1d9e6,inset_-4px_-4px_8px_#ffffff];
+  }
+
+  /* Reusable button style with neumorphic shadow */
+  .btn-neu {
+    @apply bg-white rounded-xl shadow-neu hover:shadow-sm transition-all duration-200;
+  }
+}
+
+/* === Smooth Icon Rotation (Hamburger & Chevron) === */
+@layer components {
+  #navbar-toggle i,
+  #profile-chevron {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+
+  #navbar-toggle.menu-open i {
+    @apply rotate-90;
+  }
+}
+
+/* === Profile Dropdown Animation === */
+@layer components {
+  #profile-menu {
+    @apply opacity-0 invisible -translate-y-2 transition-all duration-200 ease-in;
+  }
+
+  #profile-menu.show {
+    @apply opacity-100 visible translate-y-0;
+  }
+}

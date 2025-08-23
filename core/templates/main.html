@@ -1,0 +1,101 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarbonLens - Carbon Emission Calculator</title>
+    <link rel="stylesheet" href="{% static "css/output.css" %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+</head>
+
+
+<body class="min-h-screen text-dark leading-relaxed bg-gradient-to-br from-[#f5faf5] to-[#e6f5e4]">
+    <div class="container max-w-[1400px] mx-auto p-5">
+
+        {% comment %} NavBar {% endcomment %}
+        {% block for_nav %}
+        
+        {% endblock for_nav %}
+
+
+        {% comment %} Main Content {% endcomment %}
+        {% block for_main %}
+        
+        {% endblock for_main %}
+
+    </div>
+
+
+    <script>
+        // === Hamburger Toggle (☰ → ✕) with Rotation ===
+        const navbarToggle = document.getElementById('navbar-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const toggleIcon = navbarToggle.querySelector('i');
+
+        navbarToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+
+            if (mobileMenu.classList.contains('hidden')) {
+                toggleIcon.classList.remove('fa-xmark');
+                toggleIcon.classList.add('fa-bars');
+                navbarToggle.classList.remove('menu-open');
+            } else {
+                toggleIcon.classList.remove('fa-bars');
+                toggleIcon.classList.add('fa-xmark');
+                navbarToggle.classList.add('menu-open');
+            }
+        });
+
+        // === Mobile Profile Dropdown Toggle ===
+        const mobileProfileButton = document.getElementById('mobile-profile-button');
+        const mobileProfileMenu = document.getElementById('mobile-profile-menu');
+        const mobileChevron = document.getElementById('mobile-chevron');
+
+        mobileProfileButton.addEventListener('click', () => {
+            mobileProfileMenu.classList.toggle('hidden');
+            mobileChevron.style.transform = mobileProfileMenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+
+        // === Desktop Profile Dropdown with Smooth Slide-Down Animation ===
+        const profileButton = document.getElementById('profile-button');
+        const profileMenu = document.getElementById('profile-menu');
+        const profileChevron = document.getElementById('profile-chevron');
+
+        profileButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isShowing = profileMenu.classList.contains('show');
+
+            if (isShowing) {
+                profileMenu.classList.remove('show');
+                profileChevron.classList.remove('rotate-180');
+            } else {
+                profileMenu.classList.add('show');
+                profileChevron.classList.add('rotate-180');
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!profileButton.contains(e.target) && !profileMenu.contains(e.target)) {
+                profileMenu.classList.remove('show');
+                profileChevron.classList.remove('rotate-180');
+            }
+        });
+
+        // Optional: Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileProfileMenu.classList.add('hidden');
+                toggleIcon.classList.remove('fa-xmark');
+                toggleIcon.classList.add('fa-bars');
+                navbarToggle.classList.remove('menu-open');
+            });
+        });
+    </script>
+</body>
+</html>
