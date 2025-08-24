@@ -17,10 +17,12 @@
     <div class="container max-w-[1400px] mx-auto p-5">
 
         {% comment %} NavBar {% endcomment %}
-        {% if request.user.is_authenticated %}
-            {% include "logged_nav.html" %}
+        {% if guest_user %}
+            {% include "navbars/guest_user_nav.html" %}
+        {% elif request.user.is_authenticated  %}
+            {% include "navbars/logged_nav.html" %}
         {% else %}
-            {% include "non_logged_nav.html" %}
+            {% include "navbars/non_logged_nav.html" %}
         {% endif %}
 
 
