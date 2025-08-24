@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 
 import re
 
@@ -7,10 +8,10 @@ from users import models as mdl
 from core.forms import For_Mixin
 
 
-class Guest_User_Form( forms.ModelForm ):
+class Guest_User_Form( For_Mixin, forms.ModelForm ):
     class Meta:
         model = mdl.Guest_User
-        fields = '__all__'
+        fields = ['district']
 
 
 class User_Register_Form( For_Mixin, forms.ModelForm ):
@@ -67,3 +68,7 @@ class User_Register_Form( For_Mixin, forms.ModelForm ):
         
         return email_from_user
     
+
+class Login_Form(For_Mixin, AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)

@@ -2,43 +2,19 @@
 
 {% block for_main_container %}
 
-<!-- Sign-UP Card -->
+<!-- Sign-In Card -->
 <div class="bg-gradient-to-r from-white to-[#c2eece] rounded-2xl shadow-neu-hover p-6 transition-all duration-300 ease-in-out hover:shadow-neu hover:-translate-y-1 w-1/2 m-auto mt-16">
 
     <!-- Title -->
     <h2 class="text-2xl font-bold text-green-800 flex items-center gap-2 mb-5">
         <i class="fa-solid fa-user-plus text-primary"></i>
         <div class="text-2xl font-bold text-primary-dark ml-2">
-            Sign<span class="text-primary">UP</span>
+            Sign<span class="text-primary">IN</span>
         </div>
     </h2>
-   
+    
 
-
-    <div class="flex gap-2 mb-5">
-        <!-- User Button -->
-        <button id="bill-method"
-                class="flex-1 text-center py-2.5 text-gray-600 font-bold text-xl
-                    bg-[#f5f5f5] rounded-xl 
-                    shadow-neu transition-all duration-200 ease-in-out 
-                    hover:text-[#40b98c] hover:-translate-y-1 hover:shadow-md">
-            <i class="fa-solid fa-user-check text-primary mr-3"></i>
-            as a User
-        </button>
-
-        <!-- Guest-User Button -->
-        <button id="appliance-method"
-                class="flex-1 text-center py-2.5 text-gray-600 font-bold text-xl
-                    bg-[#f5f5f5] rounded-xl 
-                    shadow-neu transition-all duration-200 ease-in-out 
-                    hover:text-[#40b98c] hover:-translate-y-1 hover:shadow-md">
-            <i class="fa-solid fa-user  text-primary mr-3"></i>
-            as a Guest-User
-        </button>
-    </div>
-
-    <!-- Bill Input -->
-    <div id="bill-input" class="space-y-4">
+    <div id="" class="space-y-4">
         <form action="", method="POST">
             {% csrf_token %}
 
@@ -87,33 +63,13 @@
                 {% endfor %}
             {% endif %}
 
-            <button type="submit"  name="user_submit" class="flex-1 text-center py-2.5 text-gray-600 font-bold text-xl
+            <button type="submit" class="flex-1 text-center py-2.5 text-gray-600 font-bold text-xl
                         bg-[#007bff] rounded-xl text-white w-full
                         shadow-neu transition-all duration-200 ease-in-out 
                         hover:bg-[#50a4ff] hover:-translate-y-1 hover:shadow-md">
                 Submit
             </button>
-            
         </form>
-    </div>
-
-    <!-- Appliance Input (Hidden) -->
-    <div id="appliance-input" class="space-y-4 hidden">
-        <div>
-            <form action="" method="POST">
-                {% csrf_token %}
-                {{ guest_user_form.as_p }}
-
-                <button type="submit" name="guest_submit" class="flex-1 text-center py-2.5 text-gray-600 font-bold text-xl
-                        bg-[#007bff] rounded-xl text-white w-full
-                        shadow-neu transition-all duration-200 ease-in-out 
-                        hover:bg-[#50a4ff] hover:-translate-y-1 hover:shadow-md">
-                    Submit as Guest User
-                </button>
-            </form>
-        </div>
-
-        
     </div>
     
     
