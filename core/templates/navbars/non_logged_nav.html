@@ -67,10 +67,10 @@
 
         <!-- Sign In & Sign Up in Mobile Menu -->
         <li class="flex flex-col border-t border-gray-100 bg-gray-50">
-            <a href="/login" class="btn-outline m-3 px-5 py-2 rounded-xl text-center font-medium text-gray-700">
+            <a href="{% url "sign_in" %}" class="btn-outline m-3 px-5 py-2 rounded-xl text-center font-medium text-gray-700">
                 Sign In
             </a>
-            <a href="/signup" class="btn-primary m-3 px-5 py-2 rounded-xl text-center font-semibold text-white">
+            <a href="{% url "sign_up" %}" class="btn-primary m-3 px-5 py-2 rounded-xl text-center font-semibold text-white">
                 Sign Up
             </a>
         </li>

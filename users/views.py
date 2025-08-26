@@ -20,26 +20,6 @@ def get_current_guest_user(request):
     return None
 
 
-# def User_SignUp( request ):
-#     form = User_Register_Form()
-
-#     if request.method == "POST":
-#         form = User_Register_Form(request.POST)
-#         if form.is_valid():
-#             user = form.save(commit=False)
-#             user.is_active = False
-#             user.set_password(form.cleaned_data['password'])
-#             user.save()
-#             messages.success(request, "A confirmation mail send to your mail..")
-#             return redirect("sign_in")
-
-#     context = {
-#         'form': form,
-#     }
-
-#     return render(request, "registration/sign_up.html", context)
-
-
 def User_SignUp(request):
     user_form = User_Register_Form()
     guest_user_form = Guest_User_Form()
