@@ -45,20 +45,14 @@
               <!-- Profile Dropdown with Smooth Animation -->
               <div id="profile-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden z-50">
                   <ul class="text-gray-700 text-sm">
-                      <li><a href="#" class="flex items-center px-5 py-3 hover:bg-green-50 hover:text-primary transition-all duration-200">
+                      <li><a href="#" class="flex items-center px-5 py-3 hover:bg-green-50 hover:text-green-600 transition-all duration-200">
                           <i class="fas fa-user mr-3 text-primary"></i> Profile
                       </a></li>
-                      <li><a href="#" class="flex items-center px-5 py-3 hover:bg-green-50 hover:text-primary transition-all duration-200">
-                          <i class="fas fa-cog mr-3 text-primary"></i> Settings
-                      </a></li>
-                      <li><a href="#" class="flex items-center px-5 py-3 hover:bg-green-50 hover:text-primary transition-all duration-200">
-                          <i class="fas fa-bell mr-3 text-primary"></i> Notifications
-                      </a></li>
-                      <li><hr class="border-t border-gray-200"></li>
+                      <li><hr class="border-t border-red-200"></li>
                       <form method="post" action="{% url 'sign_out' %}">
                         {% csrf_token %}
-                        <button type="submit" class="w-full flex items-center px-5 py-3 text-red-600 hover:bg-red-50 transition-all duration-200">
-                            <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                        <button type="submit" class="__btn font-normal text-sm border-red-100 text-red-400 before:bg-red-100 hover:text-red-600">
+                             <span class="__btn_spn"><i class="fas fa-sign-out-alt mr-3"></i>Logout</span> 
                         </button>
                     </form>
                   </ul>
