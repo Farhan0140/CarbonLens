@@ -77,7 +77,7 @@ def Sign_In(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect("Test")
+            return redirect("dashboard")
         
     return render(request, "registration/sign_in.html", {"form": form})
 

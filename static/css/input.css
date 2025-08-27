@@ -57,3 +57,13 @@
     @apply block text-lg font-medium text-[#666] mb-2;
   }
 }
+
+@layer components {
+  .__btn {
+    @apply relative w-full py-3 text-lg text-green-500 border-2 border-green-600 rounded-lg bg-transparent cursor-pointer overflow-hidden transition-all duration-500 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-green-500 before:transform before:-translate-x-full before:transition-transform before:duration-500 before:ease-in-out before:z-0 hover:before:translate-x-0 hover:text-white;
+  }
+
+  .__btn_spn {
+    @apply relative z-10 font-bold;
+  }
+}

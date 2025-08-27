@@ -87,11 +87,8 @@
                 {% endfor %}
             {% endif %}
 
-            <button type="submit"  name="user_submit" class="flex-1 text-center py-2.5 text-gray-600 font-bold text-xl
-                        bg-[#007bff] rounded-xl text-white w-full
-                        shadow-neu transition-all duration-200 ease-in-out 
-                        hover:bg-[#50a4ff] hover:-translate-y-1 hover:shadow-md">
-                Submit
+            <button type="submit" class="__btn">
+                <span class="__btn_spn">Submit</span> </span> 
             </button>
             
         </form>
@@ -104,11 +101,8 @@
                 {% csrf_token %}
                 {{ guest_user_form.as_p }}
 
-                <button type="submit" name="guest_submit" class="flex-1 text-center py-2.5 text-gray-600 font-bold text-xl
-                        bg-[#007bff] rounded-xl text-white w-full
-                        shadow-neu transition-all duration-200 ease-in-out 
-                        hover:bg-[#50a4ff] hover:-translate-y-1 hover:shadow-md">
-                    Submit as Guest User
+                <button type="submit" name="guest_submit" class="__btn">
+                    <span class="__btn_spn">Submit as Guest User</span> 
                 </button>
             </form>
         </div>
