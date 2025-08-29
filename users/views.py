@@ -42,7 +42,7 @@ def User_SignUp(request):
                 guest_user = guest_user_form.save()
                 request.session["guest_user_id"] = guest_user.id
                 messages.success(request, "Guest user created successfully!")
-                return redirect("Test")
+                return redirect("deshboard")
 
     context = {
         "form": user_form,
