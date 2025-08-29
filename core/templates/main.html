@@ -1,0 +1,170 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarbonLens - Carbon Emission Calculator</title>
+    <link rel="stylesheet" href="{% static "css/output.css" %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+</head>
+
+
+<body class="min-h-screen text-dark leading-relaxed bg-gradient-to-br from-[#f5faf5] to-[#e6f5e4]">
+    <div class="container max-w-[1400px] mx-auto p-5">
+
+        {% comment %} NavBar {% endcomment %}
+        {% if guest_user %}
+            {% include "navbars/guest_user_nav.html" %}
+        {% elif request.user.is_authenticated  %}
+            {% include "navbars/logged_nav.html" %}
+        {% else %}
+            {% include "navbars/non_logged_nav.html" %}
+        {% endif %}
+
+
+        {% comment %} Main Content {% endcomment %}
+        {% block for_main_container %}
+        
+        {% endblock for_main_container %}
+
+    </div>
+    
+
+    {% comment %} Footer {% endcomment %}
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-leaf text-primary text-xl mr-2"></i>
+                    <span class="font-bold text-dark">CarbonTrack</span>
+                </div>
+                <p class="mt-4 md:mt-0 text-sm text-gray-500">
+                    © 2023 CarbonTrack. Helping you reduce your carbon footprint, one step at a time.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // === Hamburger Toggle ===
+            const navbarToggle = document.getElementById('navbar-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (navbarToggle && mobileMenu) {
+                const toggleIcon = navbarToggle.querySelector('i');
+                navbarToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    if (mobileMenu.classList.contains('hidden')) {
+                        toggleIcon.classList.remove('fa-xmark');
+                        toggleIcon.classList.add('fa-bars');
+                        navbarToggle.classList.remove('menu-open');
+                    } else {
+                        toggleIcon.classList.remove('fa-bars');
+                        toggleIcon.classList.add('fa-xmark');
+                        navbarToggle.classList.add('menu-open');
+                    }
+                });
+            }
+
+            // === Mobile Profile Dropdown ===
+            const mobileProfileButton = document.getElementById('mobile-profile-button');
+            const mobileProfileMenu = document.getElementById('mobile-profile-menu');
+            const mobileChevron = document.getElementById('mobile-chevron');
+
+            if (mobileProfileButton && mobileProfileMenu && mobileChevron) {
+                mobileProfileButton.addEventListener('click', () => {
+                    mobileProfileMenu.classList.toggle('hidden');
+                    mobileChevron.style.transform = mobileProfileMenu.classList.contains('hidden')
+                        ? 'rotate(0deg)' : 'rotate(180deg)';
+                });
+            }
+
+            // === Desktop Profile Dropdown ===
+            const profileButton = document.getElementById('profile-button');
+            const profileMenu = document.getElementById('profile-menu');
+            const profileChevron = document.getElementById('profile-chevron');
+
+            if (profileButton && profileMenu && profileChevron) {
+                profileButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isShowing = profileMenu.classList.contains('show');
+                    if (isShowing) {
+                        profileMenu.classList.remove('show');
+                        profileChevron.classList.remove('rotate-180');
+                    } else {
+                        profileMenu.classList.add('show');
+                        profileChevron.classList.add('rotate-180');
+                    }
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!profileButton.contains(e.target) && !profileMenu.contains(e.target)) {
+                        profileMenu.classList.remove('show');
+                        profileChevron.classList.remove('rotate-180');
+                    }
+                });
+            }
+
+            // === Sign-Up Page Toggle ===
+            const billMethod = document.getElementById("bill-method");
+            const applianceMethod = document.getElementById("appliance-method");
+            const billInput = document.getElementById("bill-input");
+            const applianceInput = document.getElementById("appliance-input");
+
+            if (billMethod && applianceMethod && billInput && applianceInput) {
+                // Initial state
+                billMethod.classList.add("active");
+                billMethod.style.boxShadow = "inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff";
+                billMethod.style.color = "#1e6e59";
+                billMethod.style.fontWeight = "600";
+
+                applianceMethod.style.color = "#666";
+                applianceMethod.style.fontWeight = "500";
+
+                // Bill click
+                billMethod.addEventListener("click", () => {
+                    if (billMethod.classList.contains("active")) return;
+
+                    billMethod.classList.add("active");
+                    billMethod.style.boxShadow = "inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff";
+                    billMethod.style.color = "#1e6e59";
+                    billMethod.style.fontWeight = "600";
+
+                    applianceMethod.classList.remove("active");
+                    applianceMethod.style.boxShadow = "8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff";
+                    applianceMethod.style.color = "#666";
+                    applianceMethod.style.fontWeight = "500";
+
+                    billInput.classList.remove("hidden");
+                    applianceInput.classList.add("hidden");
+                });
+
+                // Appliance click
+                applianceMethod.addEventListener("click", () => {
+                    if (applianceMethod.classList.contains("active")) return;
+
+                    applianceMethod.classList.add("active");
+                    applianceMethod.style.boxShadow = "inset 5px 5px 10px #d1d9e6, inset -5px -5px 10px #ffffff";
+                    applianceMethod.style.color = "#1e6e59";
+                    applianceMethod.style.fontWeight = "600";
+
+                    billMethod.classList.remove("active");
+                    billMethod.style.boxShadow = "8px 8px 16px #d1d9e6, -8px -8px 16px #ffffff";
+                    billMethod.style.color = "#666";
+                    billMethod.style.fontWeight = "500";
+
+                    applianceInput.classList.remove("hidden");
+                    billInput.classList.add("hidden");
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

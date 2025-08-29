@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     'core',
     'users',
+    'activity',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'users.context_processors.guest_user',
             ],
         },
     },
@@ -108,6 +110,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -122,6 +127,16 @@ INTERNAL_IPS = [
 #! ------------------------------------------------------------------------------
 
 AUTH_USER_MODEL = 'users.User'
+
+FRONTEND_URL = 'http://127.0.0.1:8000'
+
+# --> For sending mail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "djangomama11@gmail.com"
+EMAIL_HOST_PASSWORD = "juet usqz vybv senf"
 
 
 #! ------------------------------------------------------------------------------

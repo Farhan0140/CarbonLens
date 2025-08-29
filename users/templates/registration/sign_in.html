@@ -1,0 +1,78 @@
+{% extends "main.html" %}
+
+{% block for_main_container %}
+
+<!-- Sign-In Card -->
+<div class="bg-gradient-to-r from-white to-[#c2eece] rounded-2xl shadow-neu-hover p-6 transition-all duration-300 ease-in-out hover:shadow-neu hover:-translate-y-1 md:w-1/2 m-auto mt-16">
+
+    <!-- Title -->
+    <h2 class="text-2xl font-bold text-green-800 flex items-center gap-2 mb-5">
+        <i class="fa-solid fa-user-plus text-primary"></i>
+        <div class="text-2xl font-bold text-primary-dark ml-2">
+            Sign<span class="text-primary">IN</span>
+        </div>
+    </h2>
+    
+
+    <div id="" class="space-y-4">
+        <form action="", method="POST">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <p><label for="{{field.id_for_label}}" class="label-s"> {{ field.label }} </label></p>
+
+                {% if field.errors %}
+                <ul class="space-y-2">
+                    {% for error in field.errors %}
+                        <li class="w-full my-3">
+                            <span class="flex-1 text-center text-gray-600 font-bold text-md
+                                text-[#ff0101] rounded-xl before:content-['▹']">
+                                
+                                {{ error }}
+                            
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {{ field }}
+                
+            {% endfor %}
+
+
+            {% if form.non_field_errors %}
+            <ul class="space-y-2">
+                {% for error in form.non_field_errors %}
+                    <li class="w-full mb-3">
+                        <span class="flex-1 text-center text-gray-600 font-bold text-md
+                            text-[#ff0101] rounded-xl before:content-['▹']">
+                            
+                            {{ error }}
+                        
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="p-3 my-4 text-center rounded-lg font-bold border w-full text-white {% if 'success' in message.tags %} bg-green-700{% endif %} {% if 'error' in message.tags %}bg-red-800{% endif %}"> {{ message }} </div>
+                {% endfor %}
+            {% endif %}
+
+            <button type="submit" class="__btn">
+                <span class="__btn_spn">Submit</span> </span> 
+            </button>
+            
+        </form>
+    </div>
+    
+    <div class="hidden py-2.5 px-3 mb-5 text-gray-600 font-semibold text-lg bg-[#f5f5f5] rounded-xl shadow-neu-inner  border-0 outline-none"></div>
+
+</div>
+
+
+{% endblock for_main_container %}

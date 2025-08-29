@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .shadow-neu {
+    @apply shadow-[8px_8px_16px_#d1d9e6,-8px_-8px_16px_#ffffff];
+  }
+
+  .shadow-box-inner {
+    @apply shadow-[inset_4px_4px_8px_#d1d9e6,inset_-4px_-4px_8px_#ffffff];
+  }
+
+  /* Reusable button style with neumorphic shadow */
+  .btn-neu {
+    @apply bg-white rounded-xl shadow-neu hover:shadow-sm transition-all duration-200;
+  }
+}
+
+/* === Smooth Icon Rotation (Hamburger & Chevron) === */
+@layer components {
+  #navbar-toggle i,
+  #profile-chevron {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+
+  #navbar-toggle.menu-open i {
+    @apply rotate-90;
+  }
+}
+
+/* === Profile Dropdown Animation === */
+@layer components {
+  #profile-menu {
+    @apply opacity-0 invisible -translate-y-2 transition-all duration-200 ease-in;
+  }
+
+  #profile-menu.show {
+    @apply opacity-100 visible translate-y-0;
+  }
+}
+
+@layer components {
+  /* Outline Button - Light green with neumorphic shadow */
+  .btn-outline {
+    @apply  bg-gradient-to-r from-white to-[#a4cee5]  border border-[#b8dbb0]  shadow-[4px_4px_8px_#d1d9e6,-4px_-4px_8px_#ffffff] transition-all duration-300 ease-in-out text-[#666] font-medium rounded-xl hover:translate-y-[-2px] hover:shadow-[6px_6px_12px_#c0d0dc,-6px_-6px_12px_#ffffff] hover:border-[#82eda0] focus:outline-none focus:ring-2 focus:ring-green-300 px-5 py-2;
+  }
+
+  /* Primary Button - Vibrant green gradient */
+  .btn-primary {
+    @apply  bg-gradient-to-r from-[#4ade80] to-[#22c55e] text-white font-semibold shadow-[4px_4px_8px_rgba(163,226,189,0.6),-4px_-4px_8px_#ffffff] transition-all duration-300 ease-in-out rounded-xl hover:translate-y-[-2px] hover:shadow-[6px_6px_12px_rgba(163,226,189,0.8),-6px_-6px_12px_#ffffff] hover:filter hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-green-400 px-5 py-2;
+  }
+}
+
+@layer components {
+  .label-s {
+    @apply block text-lg font-medium text-[#666] mb-2;
+  }
+}
+
+@layer components {
+  .__btn {
+    @apply relative w-full py-3 text-lg text-green-500 border-2 border-green-600 rounded-lg bg-transparent cursor-pointer overflow-hidden transition-all duration-500 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-green-500 before:transform before:-translate-x-full before:transition-transform before:duration-500 before:ease-in-out before:z-0 hover:before:translate-x-0 hover:text-white;
+  }
+
+  .__btn_spn {
+    @apply relative z-10 font-bold;
+  }
+}
