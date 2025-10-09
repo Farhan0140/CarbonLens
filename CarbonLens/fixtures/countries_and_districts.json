@@ -1,0 +1,190 @@
+[
+  {
+    "model": "users.country",
+    "pk": 1,
+    "fields": {
+      "name": "Bangladesh"
+    }
+  },
+  {
+    "model": "users.country",
+    "pk": 2,
+    "fields": {
+      "name": "India"
+    }
+  },
+  {
+    "model": "users.country",
+    "pk": 3,
+    "fields": {
+      "name": "Pakistan"
+    }
+  },
+  {
+    "model": "users.country",
+    "pk": 4,
+    "fields": {
+      "name": "Nepal"
+    }
+  },
+  {
+    "model": "users.country",
+    "pk": 5,
+    "fields": {
+      "name": "Sri Lanka"
+    }
+  },
+  {
+    "model": "users.country",
+    "pk": 6,
+    "fields": {
+      "name": "Bhutan"
+    }
+  },
+  {
+    "model": "users.country",
+    "pk": 7,
+    "fields": {
+      "name": "Myanmar"
+    }
+  },
+  {
+    "model": "users.country",
+    "pk": 8,
+    "fields": {
+      "name": "Maldives"
+    }
+  },
+  {
+    "model": "users.country",
+    "pk": 9,
+    "fields": {
+      "name": "Afghanistan"
+    }
+  },
+  {
+    "model": "users.country",
+    "pk": 10,
+    "fields": {
+      "name": "China"
+    }
+  },
+
+  {
+    "model": "users.district",
+    "pk": 1,
+    "fields": {
+      "name": "Dhaka",
+      "country": 1
+    }
+  },
+  {
+    "model": "users.district",
+    "pk": 2,
+    "fields": {
+      "name": "Chittagong",
+      "country": 1
+    }
+  },
+  {
+    "model": "users.district",
+    "pk": 3,
+    "fields": {
+      "name": "Sylhet",
+      "country": 1
+    }
+  },
+
+  {
+    "model": "users.district",
+    "pk": 4,
+    "fields": {
+      "name": "Delhi",
+      "country": 2
+    }
+  },
+  {
+    "model": "users.district",
+    "pk": 5,
+    "fields": {
+      "name": "Mumbai",
+      "country": 2
+    }
+  },
+
+
+  {
+    "model": "users.district",
+    "pk": 6,
+    "fields": {
+      "name": "Karachi",
+      "country": 3
+    }
+  },
+
+
+  {
+    "model": "users.district",
+    "pk": 7,
+    "fields": {
+      "name": "Kathmandu",
+      "country": 4
+    }
+  },
+
+
+  {
+    "model": "users.district",
+    "pk": 8,
+    "fields": {
+      "name": "Colombo",
+      "country": 5
+    }
+  },
+
+  {
+    "model": "users.district",
+    "pk": 9,
+    "fields": {
+      "name": "Thimphu",
+      "country": 6
+    }
+  },
+
+
+  {
+    "model": "users.district",
+    "pk": 10,
+    "fields": {
+      "name": "Yangon",
+      "country": 7
+    }
+  },
+
+  {
+    "model": "users.district",
+    "pk": 11,
+    "fields": {
+      "name": "Malé",
+      "country": 8
+    }
+  },
+
+  {
+    "model": "users.district",
+    "pk": 12,
+    "fields": {
+      "name": "Kabul",
+      "country": 9
+    }
+  },
+
+  {
+    "model": "users.district",
+    "pk": 13,
+    "fields": {
+      "name": "Beijing",
+      "country": 10
+    }
+  }
+]
