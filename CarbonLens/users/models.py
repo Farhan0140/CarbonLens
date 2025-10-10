@@ -29,6 +29,14 @@ class District(models.Model):
     def __str__(self):
         return self.name
     
+    def clean(self):
+        # Optional: case-insensitive uniqueness
+        if District.objects.filter(
+            name__iexact=self.name.strip(),
+            country=self.country
+        ).exclude(pk=self.pk).exists():
+            raise ValidationError(f"District '{self.name}' already exists in {self.country.name}.")
+    
 
 class User(AbstractUser):
     country = models.ForeignKey(
@@ -47,13 +55,21 @@ class User(AbstractUser):
         related_name="users"
     )
 
+    total_co2_emission = models.FloatField(default=0.0)
+
     def __str__(self):
         return self.get_full_name()
     
-    def clean(self):
-        # Optional: case-insensitive uniqueness
-        if District.objects.filter(
-            name__iexact=self.name.strip(),
-            country=self.country
-        ).exclude(pk=self.pk).exists():
-            raise ValidationError(f"District '{self.name}' already exists in {self.country.name}.")
+    def update_total_co2(self):
+        """
+        Recalculate user's total CO₂ emission
+        based on ElectricityBill and DeviceUsage models.
+        """
+        from electricity.models import ElectricityBill, DeviceUsage  # avoid circular import
+        from django.db.models import Sum
+
+        total_from_bills = ElectricityBill.objects.filter(user=self).aggregate(Sum('total_co2'))['total_co2__sum'] or 0
+        total_from_usages = DeviceUsage.objects.filter(device__user=self).aggregate(Sum('co2_emission'))['co2_emission__sum'] or 0
+
+        self.total_co2_emission = round(total_from_bills + total_from_usages, 3)
+        self.save(update_fields=['total_co2_emission'])

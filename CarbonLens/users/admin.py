@@ -7,7 +7,7 @@ class CustomUserAdmin( UserAdmin ):
     model = User
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Personal Info', {'fields': ('first_name', 'last_name', 'country', 'district')}),
+        ('Personal Info', {'fields': ('first_name', 'last_name', 'country', 'district', 'total_co2_emission')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ("Important Date's", {'fields': ('last_login', 'date_joined')})
     )
