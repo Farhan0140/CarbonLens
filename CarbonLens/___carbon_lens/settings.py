@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'api',
     'core',
     'users',
+    'electricity.apps.ElectricityConfig',
 ]
 
 MIDDLEWARE = [
@@ -136,7 +137,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ('JWT',),
+    'AUTH_HEADER_TYPES': ('JWT', 'Bearer'),
     'ACCESS_TOKEN_LIFETIME': timedelta(days=10),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=20),
 }
