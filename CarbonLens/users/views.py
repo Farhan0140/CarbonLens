@@ -1,10 +1,9 @@
 from rest_framework import viewsets
-from .models import Country, District, User
+from .models import Country, District
 from .serializers import (
     CountrySerializer,
     DistrictSerializer,
     DistrictCreateSerializer,
-    UserSerializer
 )
 
 class CountryViewSet(viewsets.ModelViewSet):
@@ -18,7 +17,3 @@ class DistrictViewSet(viewsets.ModelViewSet):
         if self.action in ['list', 'retrieve']:
             return DistrictSerializer
         return DistrictCreateSerializer
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.select_related('country', 'district').all()
-    serializer_class = UserSerializer

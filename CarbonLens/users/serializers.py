@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Country, District, User
+from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer, UserSerializer as BaseUserSerializer
 
 class DistrictSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,16 +30,17 @@ class DistrictCreateSerializer(serializers.ModelSerializer):
         model = District
         fields = ['id', 'name', 'country']
 
-class UserSerializer(serializers.ModelSerializer):
-    country = serializers.SerializerMethodField()
 
-    class Meta:
+class UserCreateSerializer(BaseUserCreateSerializer):
+    class Meta(BaseUserCreateSerializer.Meta):
         model = User
-        fields = ['id', 'username', 'first_name', 'last_name', 'country', 'is_staff']
-        read_only_fields = ['is_staff', 'country']
+        fields = ['id', 'username', 'first_name', 'last_name', 'country', 'district','password']
+        ref_name = 'CustomUserCreateSerializer'
 
-    def get_country(self, obj):
-        return CountryWithUserDistrictSerializer(
-            obj.country,
-            context={'user': obj}
-        ).data
+
+class UserSerializer( BaseUserSerializer ):
+    class Meta( BaseUserSerializer.Meta ):
+        ref_name = 'CustomUser'
+        fields = ['id', 'username', 'first_name', 'last_name', 'country', 'district', 'is_staff']
+        read_only_fields = ['is_staff', 'username', 'country', 'district']
+        ref_name = 'CustomUserSerializer'
