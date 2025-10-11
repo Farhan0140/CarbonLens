@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'users',
     'electricity.apps.ElectricityConfig',
     'transport.apps.TransportConfig',
+    'activities.apps.ActivitiesConfig',
 ]
 
 MIDDLEWARE = [

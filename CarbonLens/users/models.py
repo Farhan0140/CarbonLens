@@ -59,6 +59,7 @@ class User(AbstractUser):
 
     total_from_electricity = models.FloatField(default=0.0)
     total_from_vehicles = models.FloatField(default=0.0)
+    total_from_activities = models.FloatField(default=0.0)
 
     def __str__(self):
         return self.get_full_name()
@@ -70,6 +71,7 @@ class User(AbstractUser):
         """
         from electricity.models import ElectricityBill, DeviceUsage 
         from transport.models import VehicleUsage
+        from activities.models import ActivityRecord
         from django.db.models import Sum
 
         total_from_bills = ElectricityBill.objects.filter(user=self).aggregate(Sum('total_co2'))['total_co2__sum'] or 0
@@ -77,8 +79,17 @@ class User(AbstractUser):
         total_from_electricity = total_from_bills + total_from_usages
 
         total_from_vehicles = VehicleUsage.objects.filter(vehicle__user=self).aggregate(Sum('co2_emission'))['co2_emission__sum'] or 0
+        
+        total_from_activities = ActivityRecord.objects.filter(user=self).aggregate(Sum('co2_emission'))['co2_emission__sum'] or 0
 
-        self.total_co2_emission = round(total_from_bills + total_from_usages + total_from_vehicles, 3)
         self.total_from_electricity = round(total_from_electricity, 3)
         self.total_from_vehicles = round(total_from_vehicles, 3)
-        self.save(update_fields=['total_from_electricity', 'total_from_vehicles', 'total_co2_emission'])
+        self.total_from_activities = round(total_from_activities, 3)
+
+        self.total_co2_emission = round(total_from_bills + total_from_usages + total_from_vehicles + total_from_activities, 3)
+        self.save(update_fields=[
+            'total_from_electricity',
+            'total_from_vehicles',
+            'total_from_activities',
+            'total_co2_emission'
+        ])

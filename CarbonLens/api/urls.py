@@ -3,6 +3,7 @@ from django.urls import path, include
 from users.views import CountryViewSet, DistrictViewSet
 from electricity.views import ElectricityBillViewSet, ElectricDeviceViewSet, DeviceUsageViewSet
 from transport.views import VehicleViewSet, VehicleUsageViewSet
+from activities.views import ActivityViewSet, ActivityRecordViewSet
 
 router = DefaultRouter()
 
@@ -15,6 +16,9 @@ router.register('device-usages', DeviceUsageViewSet, basename='device-usage')
 
 router.register('vehicles', VehicleViewSet, basename='vehicle')
 router.register('vehicle-usages', VehicleUsageViewSet, basename='vehicle-usage')
+
+router.register('activities', ActivityViewSet, basename='activity')
+router.register('activity-records', ActivityRecordViewSet, basename='activity-record')
 
 urlpatterns = [
     path('', include(router.urls)),
