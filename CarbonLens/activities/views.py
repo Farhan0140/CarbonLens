@@ -7,7 +7,7 @@ from core.permissions import IsAdminOrReadOnly
 class ActivityViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all()
     serializer_class = ActivitySerializer
-    permission_classes = [IsAdminOrReadOnly]  # only admin can create/edit activities
+    permission_classes = [IsAdminOrReadOnly]  # Only admin can add/edit activities
 
 
 class ActivityRecordViewSet(viewsets.ModelViewSet):
@@ -18,4 +18,18 @@ class ActivityRecordViewSet(viewsets.ModelViewSet):
         user = self.request.user
         if user.is_anonymous:
             return ActivityRecord.objects.none()
-        return ActivityRecord.objects.filter(user=user)
+
+        # ✅ Check if we’re accessing via nested route (activities/<id>/records/)
+        activity_id = self.kwargs.get("activity_pk")
+        queryset = ActivityRecord.objects.filter(user=user)
+        if activity_id:
+            queryset = queryset.filter(activity_id=activity_id)
+        return queryset
+
+    def perform_create(self, serializer):
+        # ✅ Automatically set user and (if nested) activity
+        activity_id = self.kwargs.get("activity_pk")
+        if activity_id:
+            serializer.save(user=self.request.user, activity_id=activity_id)
+        else:
+            serializer.save(user=self.request.user)
