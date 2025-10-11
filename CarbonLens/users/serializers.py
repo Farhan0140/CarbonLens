@@ -41,6 +41,6 @@ class UserCreateSerializer(BaseUserCreateSerializer):
 class UserSerializer( BaseUserSerializer ):
     class Meta( BaseUserSerializer.Meta ):
         ref_name = 'CustomUser'
-        fields = ['id', 'username', 'first_name', 'last_name', 'country', 'district', 'is_staff', 'total_co2_emission']
-        read_only_fields = ['is_staff', 'username', 'country', 'district', 'total_co2_emission']
+        fields = ['id', 'username', 'first_name', 'last_name', 'country', 'district', 'is_staff', 'total_from_electricity', 'total_from_vehicles', 'total_co2_emission']
+        read_only_fields = ['is_staff', 'username', 'country', 'district', 'total_co2_emission', 'total_from_electricity', 'total_from_vehicles']
         ref_name = 'CustomUserSerializer'
