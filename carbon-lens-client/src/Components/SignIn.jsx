@@ -1,5 +1,9 @@
 import { useForm } from "react-hook-form";
 import useAuthContext from "../hook/useAuthContext";
+import { FaUser } from "react-icons/fa";
+import { MdVpnKey } from "react-icons/md";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import { useState } from "react";
 
 const SignIn = () => {
 
@@ -9,12 +13,17 @@ const SignIn = () => {
     formState: {errors}
   } = useForm();
 
-  const {signIn} = useAuthContext()
+  const { signIn, isSignIn } = useAuthContext()
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [checkPassword, setCheckPassword] = useState(false);
 
   const onSubmit = async ( data ) => {
     try {
 
-      await signIn(data)
+      const res = await signIn(data);
+      setIsSuccess(res.success);
+      setSuccessMsg(res.message);
 
     } catch (error) {
       console.log("Inside signIn jsx\n", error);
@@ -27,33 +36,53 @@ const SignIn = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <h2 className="title">Sign in</h2>
-      <div className="input-field">
-        <i className="fas fa-user"></i>
+      <p className={`${isSuccess ? "text-green-500": "text-red-500"}`}>{successMsg}</p>
+      <div className="input-field flex items-center justify-center">
+        <FaUser className="text-gray-500 text-xl w-full" />
         <input 
           type="text" 
-          placeholder="Username" 
+          placeholder="Username or Email" 
+          className="for_all_input"
           {
-            ...register("userName", {required:true})
+            ...register("username", {required:true})
           }
         />
       </div>
       {
-        errors?.userName && <span className="text-red-500">*This Username field is Required</span>
+        errors?.username && <span className="text-red-500">*This Username field is Required</span>
       }
-      <div className="input-field">
-        <i className="fas fa-lock"></i>
+      <div className="input-field-password items-center">
+        <MdVpnKey className="text-gray-500 text-2xl w-full" />
         <input 
-          type="password" 
+          type={`${!checkPassword ? "text" : "password"}`} 
           placeholder="Password" 
+          className="for_password"
           {
-            ...register("signInPassword", {required:true})
+            ...register("password", {required:true})
           }
         />
+        <button
+          type="button"
+          onClick={() => setCheckPassword(!checkPassword)}
+        >
+          {
+            checkPassword ?
+              <IoMdEyeOff className="text-gray-500 text-2xl" />
+            :
+              <IoMdEye className="text-gray-500 text-2xl" />
+          }
+        </button>
       </div>
       {
-        errors?.signInPassword && <span className="text-red-500">*This Password field is Required</span>
+        errors?.password && <span className="text-red-500">*This Password field is Required</span>
       }
-      <button className="btn solid" type="submit" >Log in</button>
+      <button 
+        className="btn solid" 
+        type="submit" 
+        disabled={isSignIn}
+      >
+        { isSignIn ? <span className="loading loading-dots loading-lg"></span> : "Log in"}
+      </button>
     </form>
   );
 };
