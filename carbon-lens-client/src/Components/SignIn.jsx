@@ -16,7 +16,7 @@ const SignIn = () => {
   const { signIn, isSignIn } = useAuthContext()
   const [isSuccess, setIsSuccess] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
-  const [checkPassword, setCheckPassword] = useState(false);
+  const [checkPassword, setCheckPassword] = useState(true);
 
   const onSubmit = async ( data ) => {
     try {
