@@ -5,10 +5,12 @@ import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { MdVpnKey } from 'react-icons/md';
 import apiClient from '../services/apiClient';
 import useAuthContext from '../hook/useAuthContext';
+import { useNavigate } from 'react-router';
 
 const SignUp = () => {
 
   const {signUp, isSignUp} = useAuthContext();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -61,6 +63,7 @@ const SignUp = () => {
       const res = await signUp(data);
       setIsSuccess(res.success);
       setSuccessMsg(res.message);
+      navigate("/activities");
     } catch (error) {
       console.log("inside sign-up", error);
     }
