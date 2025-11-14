@@ -1,19 +1,38 @@
 import { useForm } from "react-hook-form";
 import apiClient from "../../services/apiClient";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Activity = ({ styles, categories }) => {
+const Activity = ({ styles }) => {
 
   const {
     register,
     handleSubmit,
+    reset,
     formState:{
       errors,
     }
   } = useForm();
 
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await apiClient.get("/activities/categories/");
+        if(response) {
+          setCategories(response.data);
+        } else {
+          console.log("error from activity categories");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [addAnotherActivity, setAddAnotherActivity] = useState(false);
 
   const onSubmit = async (data) => {
     setIsLoading(true);
@@ -24,7 +43,8 @@ const Activity = ({ styles, categories }) => {
       });
 
       if(response) {
-        console.log(response.data);
+        reset();
+        setAddAnotherActivity(true);
       } else {
         console.log("error form Activity.jsx");
       }
@@ -97,6 +117,9 @@ const Activity = ({ styles, categories }) => {
             isLoading? <span className="loading loading-dots loading-lg"></span> : "Add Activity"
           }
         </button>
+        {
+          addAnotherActivity && <span className="text-gray-500 block mt-5">If You Want to add another activity, refill the form again and add it</span>
+        }
       </div>
     </form>
   );
