@@ -23,40 +23,18 @@ export default function AllActivities() {
     setCurrentStep(prev => Math.min(steps.length - 1, prev + 1));
   };
 
-  const [isDoneActivity, setIsDoneActivity] = useState(false);
-  const [isDoneDevices, setIsDoneDevices] = useState(false);
-  const [isDoneVehicles, setIsDoneVehicles] = useState(false);
-
-  const getDoneActivity = () => {
-    setIsDoneActivity(true);
-  }
-
-  const getDoneDevices = () => {
-    setIsDoneDevices(true);
-  }
-
-  const getDoneVehicles = () => {
-    setIsDoneVehicles(true);
-  }
-
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const sayHello = () => {
-    if(isDoneActivity && isDoneDevices && isDoneVehicles) {
-      navigate("/");
-    } else {
-      setErrorMsg("You Have To fill out all activities at least once times")
-    }
+  const NavigateDashboard = () => {
+    navigate("/");
   }
 
   const renderStepContent = () => {
     switch (currentStep) {
       case 0:
-        return <ActivityComponent styles={styles} getDoneActivity={getDoneActivity} />;
+        return <ActivityComponent styles={styles} />;
       case 1:
-        return <DeviceActivity styles={styles} getDoneDevices={getDoneDevices} />
+        return <DeviceActivity styles={styles} />
       case 2:
-        return <VehiclesActivity styles={styles} getDoneVehicles={getDoneVehicles} />
+        return <VehiclesActivity styles={styles} />
       default:
         return null;
     }
@@ -121,9 +99,7 @@ export default function AllActivities() {
           </div>
 
           {/* Navigation Buttons */}
-          {
-            errorMsg.length > 0 ? <span className='text-red-500'>{errorMsg}</span> : ""
-          }
+          
           <div style={styles.navButtons}>
             <button
               onClick={goToPrevious}
@@ -152,7 +128,7 @@ export default function AllActivities() {
             </div>
 
             <button
-              onClick={currentStep === steps.length - 1 ? sayHello : goToNext}
+              onClick={currentStep === steps.length - 1 ? NavigateDashboard : goToNext}
               style={{
                 ...styles.btn,
                 backgroundColor: currentStep === steps.length - 1 ? '#27ae60' : '#3498db',
