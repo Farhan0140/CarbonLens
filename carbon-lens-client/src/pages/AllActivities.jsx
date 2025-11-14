@@ -3,9 +3,11 @@ import { ChevronLeft, Car, Smartphone, Activity } from 'lucide-react';
 import ActivityComponent from '../Components/Activities/activity';
 import DeviceActivity from '../Components/Activities/DeviceActivity';
 import VehiclesActivity from '../Components/Activities/VehiclesActivity';
+import { Link, useNavigate } from 'react-router';
 
 export default function AllActivities() {
   const [currentStep, setCurrentStep] = useState(0);
+  const navigate = useNavigate();
   
   const steps = [
     { id: 0, title: 'Activities', icon: Activity },
@@ -21,16 +23,40 @@ export default function AllActivities() {
     setCurrentStep(prev => Math.min(steps.length - 1, prev + 1));
   };
 
+  const [isDoneActivity, setIsDoneActivity] = useState(false);
+  const [isDoneDevices, setIsDoneDevices] = useState(false);
+  const [isDoneVehicles, setIsDoneVehicles] = useState(false);
 
+  const getDoneActivity = () => {
+    setIsDoneActivity(true);
+  }
+
+  const getDoneDevices = () => {
+    setIsDoneDevices(true);
+  }
+
+  const getDoneVehicles = () => {
+    setIsDoneVehicles(true);
+  }
+
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const sayHello = () => {
+    if(isDoneActivity && isDoneDevices && isDoneVehicles) {
+      navigate("/");
+    } else {
+      setErrorMsg("You Have To fill out all activities at least once times")
+    }
+  }
 
   const renderStepContent = () => {
     switch (currentStep) {
       case 0:
-        return <ActivityComponent styles={styles}/>;
+        return <ActivityComponent styles={styles} getDoneActivity={getDoneActivity} />;
       case 1:
-        return <DeviceActivity styles={styles} />
+        return <DeviceActivity styles={styles} getDoneDevices={getDoneDevices} />
       case 2:
-        return <VehiclesActivity styles={styles} />
+        return <VehiclesActivity styles={styles} getDoneVehicles={getDoneVehicles} />
       default:
         return null;
     }
@@ -95,6 +121,9 @@ export default function AllActivities() {
           </div>
 
           {/* Navigation Buttons */}
+          {
+            errorMsg.length > 0 ? <span className='text-red-500'>{errorMsg}</span> : ""
+          }
           <div style={styles.navButtons}>
             <button
               onClick={goToPrevious}
@@ -123,7 +152,7 @@ export default function AllActivities() {
             </div>
 
             <button
-              onClick={goToNext}
+              onClick={currentStep === steps.length - 1 ? sayHello : goToNext}
               style={{
                 ...styles.btn,
                 backgroundColor: currentStep === steps.length - 1 ? '#27ae60' : '#3498db',
@@ -144,9 +173,7 @@ export default function AllActivities() {
         <div style={styles.footer}>
           <p style={styles.footerText}>
             Already have an account?{' '}
-            <button style={styles.signInButton}>
-              Sign In
-            </button>
+            <Link to={"/authentication"} style={styles.signInButton}>Sign In</Link>
           </p>
         </div>
       </div>

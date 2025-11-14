@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import apiClient from "../../services/apiClient";
 
 
-const VehiclesActivity = ({styles}) => {
+const VehiclesActivity = ({styles, getDoneVehicles}) => {
 
   const {
     register,
@@ -27,9 +27,6 @@ const VehiclesActivity = ({styles}) => {
 
           setFuelTypes(response1.data);
           setVehicleType(response2.data);
-
-          console.log(response1.data);
-          console.log(response2.data);
 
         } else {
           console.log("error from activity categories");
@@ -59,11 +56,11 @@ const VehiclesActivity = ({styles}) => {
       if(response) {
         reset();
         setAddAnotherActivity(true);
+        getDoneVehicles();
       } else {
         console.log("error form Activity.jsx");
       }
 
-      console.log(data);
     } catch (error) {
       console.log(error);
       setHasError(true);
@@ -176,7 +173,7 @@ const VehiclesActivity = ({styles}) => {
           }}
         >
           {
-            isLoading? <span className="loading loading-dots loading-lg"></span> : "Add Activity"
+            isLoading? <span className="loading loading-dots loading-lg"></span> : "Add Vehicles"
           }
         </button>
         {

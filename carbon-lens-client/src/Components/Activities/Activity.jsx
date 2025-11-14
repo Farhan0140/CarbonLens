@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import apiClient from "../../services/apiClient";
 import { useEffect, useState } from "react";
 
-const Activity = ({ styles }) => {
+const Activity = ({ styles, getDoneActivity }) => {
 
   const {
     register,
@@ -45,6 +45,7 @@ const Activity = ({ styles }) => {
       if(response) {
         reset();
         setAddAnotherActivity(true);
+        getDoneActivity();
       } else {
         console.log("error form Activity.jsx");
       }

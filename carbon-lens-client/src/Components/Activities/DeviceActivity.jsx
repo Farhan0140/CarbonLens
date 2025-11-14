@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import apiClient from "../../services/apiClient";
 
-const DeviceActivity = ({styles}) => {
+const DeviceActivity = ({styles, getDoneDevices}) => {
 
   const {
     register,
@@ -28,6 +28,7 @@ const DeviceActivity = ({styles}) => {
       if(response) {
         reset();
         setAddAnotherActivity(true);
+        getDoneDevices();
       } else {
         console.log("error form Device.jsx");
       }
