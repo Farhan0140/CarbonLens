@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ChevronLeft, Car, Smartphone, Activity } from 'lucide-react';
-import apiClient from '../services/apiClient';
 import ActivityComponent from '../Components/Activities/activity';
+import DeviceActivity from '../Components/Activities/DeviceActivity';
 
 export default function AllActivities() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -20,91 +20,14 @@ export default function AllActivities() {
     setCurrentStep(prev => Math.min(steps.length - 1, prev + 1));
   };
 
-  const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await apiClient.get("/activities/categories/");
-        if(response) {
-          setCategories(response.data);
-          console.log(response.data);
-        } else {
-          console.log("error from activity categories");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
 
   const renderStepContent = () => {
     switch (currentStep) {
       case 0:
-        return <ActivityComponent styles={styles} categories={categories} />;
+        return <ActivityComponent styles={styles}/>;
       case 1:
-        return (
-          <div style={styles.stepContent}>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>
-                Primary Device
-              </label>
-              <select style={styles.inputField}>
-                <option>iPhone 14 Pro</option>
-                <option>Samsung Galaxy S23</option>
-                <option>Google Pixel 7</option>
-                <option>iPad Pro</option>
-                <option>MacBook Pro</option>
-                <option>Windows Laptop</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>
-                Device Serial Number
-              </label>
-              <input
-                type="text"
-                placeholder="Enter serial number"
-                style={styles.inputField}
-              />
-            </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>
-                Operating System
-              </label>
-              <div style={styles.checkboxGroup}>
-                <div style={styles.checkboxItem}>
-                  <input type="checkbox" id="ios" style={styles.checkbox} />
-                  <label htmlFor="ios" style={styles.checkboxLabel}>iOS</label>
-                </div>
-                <div style={styles.checkboxItem}>
-                  <input type="checkbox" id="android" style={styles.checkbox} />
-                  <label htmlFor="android" style={styles.checkboxLabel}>Android</label>
-                </div>
-                <div style={styles.checkboxItem}>
-                  <input type="checkbox" id="macos" style={styles.checkbox} />
-                  <label htmlFor="macos" style={styles.checkboxLabel}>macOS</label>
-                </div>
-                <div style={styles.checkboxItem}>
-                  <input type="checkbox" id="windows" style={styles.checkbox} />
-                  <label htmlFor="windows" style={styles.checkboxLabel}>Windows</label>
-                </div>
-              </div>
-            </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>
-                Notifications Preference
-              </label>
-              <select style={styles.inputField}>
-                <option>All Notifications</option>
-                <option>Important Only</option>
-                <option>Weekly Summary</option>
-                <option>Disabled</option>
-              </select>
-            </div>
-          </div>
-        );
+        return <DeviceActivity styles={styles} />
       case 2:
         return (
           <div style={styles.stepContent}>
