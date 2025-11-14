@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ChevronLeft, Car, Smartphone, Activity } from 'lucide-react';
 import ActivityComponent from '../Components/Activities/activity';
 import DeviceActivity from '../Components/Activities/DeviceActivity';
+import VehiclesActivity from '../Components/Activities/VehiclesActivity';
 
 export default function AllActivities() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -29,92 +30,7 @@ export default function AllActivities() {
       case 1:
         return <DeviceActivity styles={styles} />
       case 2:
-        return (
-          <div style={styles.stepContent}>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>
-                Primary Vehicle
-              </label>
-              <div style={styles.grid2}>
-                <div>
-                  <select style={styles.inputField}>
-                    <option>Car</option>
-                    <option>Motorcycle</option>
-                    <option>Truck</option>
-                    <option>SUV</option>
-                    <option>Van</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div>
-                  <select style={styles.inputField}>
-                    <option>Toyota</option>
-                    <option>Honda</option>
-                    <option>Ford</option>
-                    <option>Chevrolet</option>
-                    <option>BMW</option>
-                    <option>Mercedes</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>
-                Vehicle Model & Year
-              </label>
-              <div style={styles.grid2}>
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Model (e.g., Camry)"
-                    style={styles.inputField}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="number"
-                    placeholder="Year"
-                    min="1900"
-                    max="2025"
-                    style={styles.inputField}
-                  />
-                </div>
-              </div>
-            </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>
-                License Plate
-              </label>
-              <input
-                type="text"
-                placeholder="Enter license plate number"
-                style={styles.inputField}
-              />
-            </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>
-                Vehicle Color
-              </label>
-              <input
-                type="text"
-                placeholder="e.g., Silver Metallic"
-                style={styles.inputField}
-              />
-            </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>
-                Usage Frequency
-              </label>
-              <select style={styles.inputField}>
-                <option>Daily</option>
-                <option>Weekly</option>
-                <option>Monthly</option>
-                <option>Rarely</option>
-              </select>
-            </div>
-          </div>
-        );
+        return <VehiclesActivity styles={styles} />
       default:
         return null;
     }
