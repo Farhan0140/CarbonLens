@@ -4,8 +4,11 @@ import { FaUser } from "react-icons/fa";
 import { MdVpnKey } from "react-icons/md";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const SignIn = () => {
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -24,6 +27,9 @@ const SignIn = () => {
       const res = await signIn(data);
       setIsSuccess(res.success);
       setSuccessMsg(res.message);
+      if(res.success) {
+        navigate("/");
+      }
 
     } catch (error) {
       console.log("Inside signIn jsx\n", error);

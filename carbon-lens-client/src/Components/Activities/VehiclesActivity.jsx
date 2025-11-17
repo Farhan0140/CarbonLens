@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import apiClient from "../../services/apiClient";
 
 
-const VehiclesActivity = ({styles, getDoneVehicles}) => {
+const VehiclesActivity = ({styles}) => {
 
   const {
     register,
@@ -56,7 +56,6 @@ const VehiclesActivity = ({styles, getDoneVehicles}) => {
       if(response) {
         reset();
         setAddAnotherActivity(true);
-        getDoneVehicles();
       } else {
         console.log("error form Activity.jsx");
       }

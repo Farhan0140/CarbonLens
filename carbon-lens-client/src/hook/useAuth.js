@@ -1,10 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import apiClient from "../services/apiClient";
 
 
 const useAuth = () => {
+  
+  const getToken = () => {
+    const token = localStorage.getItem("authTokens");
+    return token ? JSON.parse(token) : null;
+  }
 
-  const [authToken, setAuthToken] = useState();
+  const [authToken, setAuthToken] = useState( getToken() );
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if(authToken)
+      fetchUserProfile();
+  }, [authToken]);
+
+  const fetchUserProfile = async () => {
+    try {
+      const response = await apiClient.get("/auth/users/me/");
+      setUser(response.data);
+    } catch (error) {
+      console.log("error from fetchUserProfile ", error);
+    }
+  }  
 
 
   // Sign-IN
@@ -50,8 +71,20 @@ const useAuth = () => {
         district: data.district,
         password: data.password1
       });
-      
+
       console.log(response.data);
+
+      if(response) {
+        setUser(response.data);
+        const res = await signIn({username: data.username, password:data.password1});
+
+        if(res.success) {
+          return {
+            success: true,
+            message: "Sign-Up successful",
+          };
+        }
+      }
 
       return {
         success: true,
@@ -79,13 +112,23 @@ const useAuth = () => {
     }
   }
 
+  const logOut = () => {
+    if(authToken) {
+      setAuthToken(null);
+      setUser(null);
+      localStorage.removeItem("authTokens");
+    }
+  }
+
 
   return {
+    user,
     authToken,
     signIn,
     isSignIn,
     signUp,
     isSignUp,
+    logOut,
   }
 };
 

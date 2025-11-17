@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronLeft, Car, Smartphone, Activity } from 'lucide-react';
-import ActivityComponent from '../Components/Activities/activity';
+import ActivityComponent from '../Components/Activities/Activity';
 import DeviceActivity from '../Components/Activities/DeviceActivity';
 import VehiclesActivity from '../Components/Activities/VehiclesActivity';
 import { Link, useNavigate } from 'react-router';

@@ -63,7 +63,9 @@ const SignUp = () => {
       const res = await signUp(data);
       setIsSuccess(res.success);
       setSuccessMsg(res.message);
-      navigate("/activities");
+      if(res.success){
+        navigate("/activities");
+      } 
     } catch (error) {
       console.log("inside sign-up", error);
     }

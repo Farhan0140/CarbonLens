@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { Home, BarChart3, Users, Settings, User, LogOut, LayoutDashboard, Leaf } from 'lucide-react';
+import { Link } from 'react-router';
+import useAuthContext from '../hook/useAuthContext';
+import { IoLogInSharp } from 'react-icons/io5';
 
 const NavBar = () => {
+
+  const {user, logOut} = useAuthContext();
+
+  console.log(user);
 
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -29,14 +36,16 @@ const NavBar = () => {
     >
       {/* Logo Section */}
       <div className={`p-4 border-b border-gray-200 transition-all duration-300 ${isCollapsed ? 'px-2' : 'px-6'}`}>
-        <div className="flex items-center space-x-3">
-          <div className="bg-green-600 p-2 rounded-lg">
-            <Leaf className="h-6 w-6 text-white" />
+        <Link to={"/"}>
+          <div className="flex items-center space-x-3">
+            <div className="bg-green-600 p-2 rounded-lg">
+              <Leaf className="h-6 w-6 text-white" />
+            </div>
+            {!isCollapsed && (
+              <span className="text-lg font-bold text-gray-800 whitespace-nowrap">Carbon Lens</span>
+            )}
           </div>
-          {!isCollapsed && (
-            <span className="text-lg font-bold text-gray-800 whitespace-nowrap">Carbon Lens</span>
-          )}
-        </div>
+        </Link>
       </div>
 
       {/* Main Navigation */}
@@ -91,24 +100,48 @@ const NavBar = () => {
       </nav>
 
       {/* Profile Section */}
-      <div className={`px-2 py-3 border-t border-gray-200 relative transition-all duration-300 ${isCollapsed ? 'px-2' : 'px-4'}`}>
-        <button
-          onClick={toggleProfileMenu}
-          className={`w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 group ${
-            isCollapsed ? 'justify-center p-2' : ''
-          }`}
-        >
-          <div className="w-8 h-8 bg-linear-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center">
-            <User className="w-4 h-4 text-white" />
-          </div>
 
-          {!isCollapsed && (
-            <div className="flex-1 text-left min-w-0">
-              <p className="font-medium text-gray-800 text-sm truncate">User Profile</p>
-              <p className="text-xs text-gray-500 truncate">Admin</p>
-            </div>
-          )}
-        </button>
+
+      <div className={`px-2 py-3 border-t border-gray-200 relative transition-all duration-300 ${isCollapsed ? 'px-2' : 'px-4'}`}>
+        {
+          user ? (
+            <button
+              onClick={toggleProfileMenu}
+              className={`w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 group ${
+                isCollapsed ? 'justify-center p-2' : ''
+              }`}
+            >
+              <div className="w-8 h-8 bg-linear-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center">
+                <User className="w-4 h-4 text-white" />
+              </div>
+
+              {!isCollapsed && (
+                <div className="flex-1 text-left min-w-0">
+                  <p className="font-medium text-gray-800 text-sm truncate">{user?.first_name} {user?.last_name}</p>
+                  <p className="text-xs text-gray-500 truncate">{user?.is_staff ? "Admin": "User"}</p>
+                </div>
+              )}
+            </button>
+          ) : (
+            <Link to={"authentication"}
+              className={`w-full flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 group ${
+                isCollapsed ? 'justify-center p-2' : ''
+              }`}
+            >
+              <div className="w-8 h-8 bg-linear-to-br from-red-500 to-rose-600 rounded-full flex items-center justify-center">
+                <IoLogInSharp className="text-xl text-white" />
+              </div>
+
+              {!isCollapsed && (
+                <div className="text-black font-semibold">
+                  Log-In
+                </div>
+              )}
+            </Link>
+          )
+        }
+
+
 
         {/* Profile Menu (Expanded) */}
         {showProfileMenu && !isCollapsed && (
@@ -120,7 +153,7 @@ const NavBar = () => {
               <button className="w-full flex items-center space-x-3 px-4 py-2.5 text-gray-700 hover:bg-gray-50 text-sm">
                 <LayoutDashboard className="w-4 h-4" /><span>Dashboard</span>
               </button>
-              <button className="w-full flex items-center space-x-3 px-4 py-2.5 text-gray-700 hover:bg-gray-50 text-sm">
+              <button onClick={() => {logOut(); toggleProfileMenu(); }}  className="w-full flex items-center space-x-3 px-4 py-2.5 text-gray-700 hover:bg-gray-50 text-sm">
                 <LogOut className="w-4 h-4" /><span>Log Out</span>
               </button>
             </div>
@@ -137,7 +170,7 @@ const NavBar = () => {
               <button className="w-full flex items-center space-x-3 px-4 py-2.5 text-gray-700 hover:bg-gray-50 text-sm">
                 <LayoutDashboard className="w-4 h-4" /><span>Dashboard</span>
               </button>
-              <button className="w-full flex items-center space-x-3 px-4 py-2.5 text-gray-700 hover:bg-gray-50 text-sm">
+              <button onClick={() => {logOut(); toggleProfileMenu(); }} className="w-full flex items-center space-x-3 px-4 py-2.5 text-gray-700 hover:bg-gray-50 text-sm">
                 <LogOut className="w-4 h-4" /><span>Log Out</span>
               </button>
             </div>
