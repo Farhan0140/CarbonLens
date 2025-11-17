@@ -4,12 +4,21 @@ from rest_framework.response import Response
 from .models import Activity, ActivityRecord
 from .serializers import ActivitySerializer, ActivityRecordSerializer
 from core.permissions import IsAdminOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 
 class ActivityViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all()
     serializer_class = ActivitySerializer
-    permission_classes = [IsAdminOrReadOnly]  # Only admin can add/edit activities
+    permission_classes = [IsAuthenticated] 
+
+    def get_queryset(self):
+        # Only return activities of the current user
+        return Activity.objects.filter(user=self.request.user)
+    
+    def perform_create(self, serializer):
+        # Automatically set the user to the current user
+        serializer.save(user=self.request.user)
 
     @action(detail=False, methods=['get'], url_path='categories', permission_classes=[permissions.AllowAny])
     def categories(self, request):

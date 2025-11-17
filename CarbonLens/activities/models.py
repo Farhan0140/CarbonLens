@@ -4,6 +4,13 @@ from datetime import date
 
 
 class Activity(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        default=1,
+        related_name="activities"
+    )
+
     CATEGORY_CHOICES = [
         ("food_waste", "Food Waste"),
         ("plastic_bottle", "Plastic Bottle"),
@@ -27,7 +34,7 @@ class Activity(models.Model):
     emission_factor = models.FloatField(editable=False)  # kg CO₂ per unit
 
     class Meta:
-        unique_together = ('name', 'category')
+        unique_together = ('user', 'name', 'category')
 
     def __str__(self):
         return f"{self.name} ({self.category})"

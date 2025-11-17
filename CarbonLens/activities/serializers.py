@@ -5,7 +5,8 @@ from .models import Activity, ActivityRecord
 class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Activity
-        fields = ['id', 'name', 'category', 'unit', 'emission_factor']
+        fields = ['id', 'user', 'name', 'category', 'unit', 'emission_factor']
+        read_only_fields = ['user', 'unit', 'emission_factor']
 
 
 class ActivityRecordSerializer(serializers.ModelSerializer):
