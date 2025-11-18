@@ -24,7 +24,7 @@ export default function TrackActivities() {
   };
 
   const NavigateDashboard = () => {
-    navigate("/");
+    navigate("/user-dashboard");
   }
 
   const renderStepContent = () => {
@@ -132,7 +132,7 @@ export default function TrackActivities() {
                 }
               }}
             >
-              {currentStep === steps.length - 1 ? 'Complete Registration' : 'Next'}
+              {currentStep === steps.length - 1 ? 'Go to Dashboard' : 'Next'}
               {currentStep < steps.length - 1 && (
                 <ChevronLeft size={20} style={{ marginLeft: '8px', transform: 'rotate(180deg)' }} />
               )}

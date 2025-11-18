@@ -5,6 +5,7 @@ import useAuthContext from '../hook/useAuthContext';
 import { IoLogInSharp } from 'react-icons/io5';
 import { CgTrack } from 'react-icons/cg';
 import { GoPasskeyFill } from 'react-icons/go';
+import { IoIosAddCircleOutline } from 'react-icons/io';
 
 const NavBar = () => {
   const { user, logOut } = useAuthContext();
@@ -64,6 +65,13 @@ const NavBar = () => {
             <NavLink to="/track-activities" className={({ isActive }) => menuItemClasses(isActive)}>
               <CgTrack className={`w-5 h-5 ${isCollapsed ? 'mx-auto' : ''}`} />
               {!isCollapsed && <span className="font-medium whitespace-nowrap">Track Your Emissions</span>}
+            </NavLink>
+          </li>
+          
+          <li>
+            <NavLink to="/activities" className={({ isActive }) => menuItemClasses(isActive)}>
+              <IoIosAddCircleOutline className={`w-5 h-5 ${isCollapsed ? 'mx-auto' : ''}`} />
+              {!isCollapsed && <span className="font-medium whitespace-nowrap">Add Activities</span>}
             </NavLink>
           </li>
 
