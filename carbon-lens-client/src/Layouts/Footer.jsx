@@ -1,5 +1,6 @@
 import { Leaf } from 'lucide-react';
 import React from 'react';
+import { Link } from 'react-router';
 
 const Footer = () => {
   return (
@@ -19,9 +20,11 @@ const Footer = () => {
                 through innovative tracking and analytics solutions.
               </p>
               <div className="flex space-x-4">
-                <button className="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg font-medium transition-colors">
-                  Start Tracking
-                </button>
+                <Link to={"/"}>
+                  <div className="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg font-medium transition-colors">
+                    Start Tracking
+                  </div>
+                </Link>
               </div>
             </div>
             

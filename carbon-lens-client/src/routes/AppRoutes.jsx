@@ -3,6 +3,8 @@ import UserAuthentication from "../pages/UserAuthentication";
 import App from "../App";
 import AllActivities from "../pages/AllActivities";
 import MainLayout from "../Layouts/MainLayout";
+import UserDashboard from "../pages/UserDashboard";
+import TrackActivities from "../pages/TrackActivities";
 
 const AppRoutes = () => {
   return (
@@ -13,6 +15,8 @@ const AppRoutes = () => {
           <Route index element={<App />} />
           <Route path="/authentication" element={<UserAuthentication />} />
           <Route path="/activities" element={<AllActivities />} />
+          <Route path="/track-activities" element={<TrackActivities />} />
+          <Route path="/user-dashboard" element={<UserDashboard />} />
         </Route>
       </Routes>
     </div>
