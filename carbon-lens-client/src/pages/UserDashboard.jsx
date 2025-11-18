@@ -152,7 +152,7 @@ const UserDashboard = () => {
                     <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" className="text-center">
                       <tspan x="50%" dy="-0.6em" className="text-3xl font-extrabold fill-gray-900">{totalCo2Emission}</tspan>
                       <tspan x="50%" dy="1.4em" className="text-lg font-semibold fill-gray-700">kg CO₂e</tspan>
-                      <tspan x="50%" dy="1.4em" className="text-sm fill-gray-600">Today's Total</tspan>
+                      <tspan x="50%" dy="1.4em" className="text-sm fill-gray-600">Total</tspan>
                     </text>
                     <Tooltip 
                       formatter={(value) => [`${value} kg CO₂e`, 'Emissions']}
