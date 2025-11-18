@@ -80,6 +80,7 @@ const useActivities = () => {
   return {
     activities,
     devices,
+    vehicles,
     totalActivityEmission,
     totalDevicesEmission,
     totalVehiclesEmission,

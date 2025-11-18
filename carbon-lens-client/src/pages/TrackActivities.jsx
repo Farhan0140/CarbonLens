@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { ChevronLeft, Car, Smartphone, Activity } from 'lucide-react';
-import ActivityComponent from '../Components/Activities/Activity';
-import VehiclesActivity from '../Components/Activities/VehiclesActivity';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import TrackDeviceActivity from '../Components/TrackActivities/TrackDeviceActivity';
+import TrackOtherActivities from '../Components/TrackActivities/TrackOtherActivities';
+import TrackVehiclesActivity from '../Components/TrackActivities/TrackVehiclesActivity';
 
 export default function TrackActivities() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -30,11 +30,11 @@ export default function TrackActivities() {
   const renderStepContent = () => {
     switch (currentStep) {
       case 0:
-        return <ActivityComponent styles={styles} />;
+        return <TrackOtherActivities styles={styles} />;
       case 1:
         return <TrackDeviceActivity styles={styles} />
       case 2:
-        return <VehiclesActivity styles={styles} />
+        return <TrackVehiclesActivity styles={styles} />
       default:
         return null;
     }

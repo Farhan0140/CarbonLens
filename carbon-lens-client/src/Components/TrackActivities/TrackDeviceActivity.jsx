@@ -79,15 +79,16 @@ export default function TrackDeviceActivity() {
       // Show success feedback
       setSubmitted(prev => ({ ...prev, [deviceId]: true }));
       
-      // Reset input after 2 seconds
+      // Reset states after 2 seconds
       setTimeout(() => {
         setSubmitted(prev => ({ ...prev, [deviceId]: false }));
+        setSubmitting(prev => ({ ...prev, [deviceId]: false })); // This was missing!
         setUsageInputs(prev => ({ ...prev, [deviceId]: '' }));
       }, 2000);
     } catch (error) {
       console.log("error from Track Device Activity", error);
       alert('Failed to submit usage. Please try again.');
-      setSubmitting(prev => ({ ...prev, [deviceId]: false }));
+      setSubmitting(prev => ({ ...prev, [deviceId]: false })); // Reset on error too
     }
   };
 
