@@ -108,7 +108,6 @@ export default function TrackOtherActivities() {
 
   return (
     <div className="min-h-screen">
-      <h1 className='text-black'>akflkasdfjsdkf</h1>
       <div className="max-w-6xl mx-auto">
         <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
           {localActivities.map((activity) => (
