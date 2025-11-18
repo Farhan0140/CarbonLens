@@ -8,8 +8,6 @@ const NavBar = () => {
 
   const {user, logOut} = useAuthContext();
 
-  console.log(user);
-
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [activeMenu, setActiveMenu] = useState("home"); // active menu

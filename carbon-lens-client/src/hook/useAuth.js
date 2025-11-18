@@ -72,8 +72,6 @@ const useAuth = () => {
         password: data.password1
       });
 
-      console.log(response.data);
-
       if(response) {
         setUser(response.data);
         const res = await signIn({username: data.username, password:data.password1});
